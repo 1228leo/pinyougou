@@ -56,6 +56,10 @@ public class TbSpecification implements Serializable {
         this.specName = specName;
     }
 
+    public String getText(){
+        return this.specName;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -72,6 +72,10 @@ public class TbBrand implements Serializable {
         this.firstChar = firstChar;
     }
 
+    public String getText(){
+        return this.name;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

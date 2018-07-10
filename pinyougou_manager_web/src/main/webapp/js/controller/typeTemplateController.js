@@ -97,9 +97,9 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
     }
 
     //规格列表
-	$scope.specList = {data:[]};
-	$scope.findSpecList=function () {
-		specificationService.findAll().success(function (response) {
+    $scope.specList = {data:[]};
+    $scope.findSpecList=function () {
+        specificationService.findAll().success(function (response) {
             for(var i = 0; i < response.length; i++){
                 delete response[i]["specName"];
             }
@@ -118,4 +118,5 @@ app.controller('typeTemplateController' ,function($scope,$controller,typeTemplat
     $scope.deleteTableRow=function (index) {
         $scope.entity.customAttributeItems.splice(index,1);
     }
+
 });	
