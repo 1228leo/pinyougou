@@ -7,9 +7,9 @@ import com.github.abel533.entity.Example;
 import com.github.pagehelper.PageInfo;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.pinyougou.mapper.TbBrandMapper;
-import com.pinyougou.pojo.TbBrand;
-import com.pinyougou.sellergoods.service.BrandService;
+import com.pinyougou.mapper.TbProvincesMapper;
+import com.pinyougou.pojo.TbProvinces;
+import com.pinyougou.sellergoods.service.ProvincesService;
 import entity.PageResult;
 
 /**
@@ -18,17 +18,17 @@ import entity.PageResult;
  *
  */
 @Service
-public class BrandServiceImpl implements BrandService {
+public class ProvincesServiceImpl implements ProvincesService {
 
 	@Autowired
-	private TbBrandMapper brandMapper;
+	private TbProvincesMapper provincesMapper;
 	
 	/**
 	 * 查询全部
 	 */
 	@Override
-	public List<TbBrand> findAll() {
-		return brandMapper.select(null);
+	public List<TbProvinces> findAll() {
+		return provincesMapper.select(null);
 	}
 
 	/**
@@ -37,17 +37,17 @@ public class BrandServiceImpl implements BrandService {
 	@Override
 	public PageResult findPage(int pageNum, int pageSize) {
 		
-		PageResult<TbBrand> result = new PageResult<TbBrand>();
+		PageResult<TbProvinces> result = new PageResult<TbProvinces>();
         //设置分页条件
         PageHelper.startPage(pageNum, pageSize);
 
         //查询数据
-        List<TbBrand> list = brandMapper.select(null);
+        List<TbProvinces> list = provincesMapper.select(null);
         //保存数据列表
         result.setRows(list);
 
         //获取总记录数
-        PageInfo<TbBrand> info = new PageInfo<TbBrand>(list);
+        PageInfo<TbProvinces> info = new PageInfo<TbProvinces>(list);
         result.setTotal(info.getTotal());
 		return result;
 	}
@@ -56,8 +56,8 @@ public class BrandServiceImpl implements BrandService {
 	 * 增加
 	 */
 	@Override
-	public void add(TbBrand brand) {
-		brandMapper.insertSelective(brand);		
+	public void add(TbProvinces provinces) {
+		provincesMapper.insertSelective(provinces);		
 	}
 
 	
@@ -65,8 +65,8 @@ public class BrandServiceImpl implements BrandService {
 	 * 修改
 	 */
 	@Override
-	public void update(TbBrand brand){
-		brandMapper.updateByPrimaryKeySelective(brand);
+	public void update(TbProvinces provinces){
+		provincesMapper.updateByPrimaryKeySelective(provinces);
 	}	
 	
 	/**
@@ -75,8 +75,8 @@ public class BrandServiceImpl implements BrandService {
 	 * @return
 	 */
 	@Override
-	public TbBrand findOne(Long id){
-		return brandMapper.selectByPrimaryKey(id);
+	public TbProvinces findOne(Long id){
+		return provincesMapper.selectByPrimaryKey(id);
 	}
 
 	/**
@@ -87,44 +87,44 @@ public class BrandServiceImpl implements BrandService {
 		//数组转list
         List longs = Arrays.asList(ids);
         //构建查询条件
-        Example example = new Example(TbBrand.class);
+        Example example = new Example(TbProvinces.class);
         Example.Criteria criteria = example.createCriteria();
         criteria.andIn("id", longs);
 
         //跟据查询条件删除数据
-        brandMapper.deleteByExample(example);
+        provincesMapper.deleteByExample(example);
 	}
 	
 	
 	@Override
-	public PageResult findPage(TbBrand brand, int pageNum, int pageSize) {
-		PageResult<TbBrand> result = new PageResult<TbBrand>();
+	public PageResult findPage(TbProvinces provinces, int pageNum, int pageSize) {
+		PageResult<TbProvinces> result = new PageResult<TbProvinces>();
         //设置分页条件
         PageHelper.startPage(pageNum, pageSize);
 
         //构建查询条件
-        Example example = new Example(TbBrand.class);
+        Example example = new Example(TbProvinces.class);
         Example.Criteria criteria = example.createCriteria();
 		
-		if(brand!=null){			
+		if(provinces!=null){			
 						//如果字段不为空
-			if (brand.getName()!=null && brand.getName().length()>0) {
-				criteria.andLike("name", "%" + brand.getName() + "%");
+			if (provinces.getProvinceid()!=null && provinces.getProvinceid().length()>0) {
+				criteria.andLike("provinceid", "%" + provinces.getProvinceid() + "%");
 			}
 			//如果字段不为空
-			if (brand.getFirstChar()!=null && brand.getFirstChar().length()>0) {
-				criteria.andLike("firstChar", "%" + brand.getFirstChar() + "%");
+			if (provinces.getProvince()!=null && provinces.getProvince().length()>0) {
+				criteria.andLike("province", "%" + provinces.getProvince() + "%");
 			}
 	
 		}
 
         //查询数据
-        List<TbBrand> list = brandMapper.selectByExample(example);
+        List<TbProvinces> list = provincesMapper.selectByExample(example);
         //保存数据列表
         result.setRows(list);
 
         //获取总记录数
-        PageInfo<TbBrand> info = new PageInfo<TbBrand>(list);
+        PageInfo<TbProvinces> info = new PageInfo<TbProvinces>(list);
         result.setTotal(info.getTotal());
 		
 		return result;
